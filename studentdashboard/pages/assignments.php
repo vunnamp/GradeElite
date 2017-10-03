@@ -36,6 +36,68 @@
                                             <input type="file" name="file"></br>
                                             <button type="submit" class="btn btn-default" name="upload">Submit Assignment</button>
                                         </div>
+										<?php
+
+
+if(isset($_POST['upload'])){
+
+
+    $array = explode(".",$_FILES['file']['name']);
+
+    $filename = $array[0];
+
+    $fileextension = strtolower(end($array));
+
+    if($fileextension == "zip"){
+
+        if(is_dir("GradElite/unziped".$filename) == false)
+        {
+
+            move_uploaded_file($_FILES['file']['tmp_name'],'Ziped/'.$_FILES['file']['name']);
+
+            $zip = new ZipArchive();
+
+            $zip->open("Ziped/".$_FILES['file']['name']);
+
+            for($num = 0; $num < $zip->numFiles; $num++)
+            {
+
+               $fileinfo =  $zip->statIndex($num);
+
+               $zip->extractTo("unZiped/".$filename);
+
+               $zip->close();
+}
+
+            echo "<span style='color:green'>"."file has been successfully uploaded! Thank-you"."</span>";           
+        }
+        else
+        {
+
+            echo $filename."has already been unzipped";
+        }
+
+
+
+    }
+
+    else
+
+    {
+
+        echo "<span style='color:red'>"."Not a vaild file type! Please select .zip files"."</span>";
+
+
+    }
+
+
+
+
+
+
+}
+
+?>
                                         <!-- <div class="form-group">
                                             <label>Text area</label>
                                             <textarea class="form-control" rows="3"></textarea>
@@ -205,61 +267,3 @@
         </div>
         <!-- /#page-wrapper -->
 <?php include_once('footer.php'); ?>  
-
-<?php
-
-
-if(isset($_POST['upload'])){
-
-
-    $array = explode(".",$_FILES['file']['name']);
-
-    $filename = $array[0];
-	
-	$file = "Server.java";
-
-    $fileextension = strtolower(end($array));
-
-    if($fileextension == "zip"){
-
-        if(is_dir("GradElite/unziped".$filename) == false)
-        {
-
-            move_uploaded_file($_FILES['file']['tmp_name'],'Ziped/'.$_FILES['file']['name']);
-
-            $zip = new ZipArchive();
-
-            $zip->open("Ziped/".$_FILES['file']['name']);
-
-            for($num = 0; $num < $zip->numFiles; $num++)
-            {
-
-               $fileinfo =  $zip->statIndex($num);
-
-               $zip->extractTo("unZiped/".$filename);
-
-               $zip->close();
-			   
-			   //exec("javac ".$file,$output,$resultCode);
-			}
-        }
-        else
-        {
-
-            echo $filename."has already been unzipped";
-        }
-    }
-
-    else
-
-    {
-
-
-    }
-
-
-
-
-
-
-}

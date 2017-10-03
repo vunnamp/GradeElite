@@ -13,7 +13,7 @@
 
 if(isset($_POST['submit'])){
 		$email = $_POST['email'];
-		$password = $_POST['password'];
+		$password = hash('sha512', $_POST['password']);
 
 			$query = "select * from login where email= '$email' and password = '$password'";
 			$result = mysqli_query($conn, $query);
