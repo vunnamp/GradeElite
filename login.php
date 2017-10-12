@@ -31,8 +31,8 @@ if(isset($_POST['submit'])){
 
 				if($role == 'admin'){
 
-				header('location:admin_dashboard.php');
-				exit0;
+				header('location:admin_dashboard/admin.php');
+				
 
 			}else{if ($role == 'instructor') {
 

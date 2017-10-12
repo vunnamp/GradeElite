@@ -52,7 +52,7 @@ session_start();
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">GradElite</a>
+                <a class="navbar-brand" href="index.php">GradElite</a>
             </div>
             <!-- /.navbar-header -->
 

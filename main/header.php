@@ -15,6 +15,7 @@ session_start();
 
 <!-- Latest compiled JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 </head>
 <body>
 <nav class="navbar navbar-default">
@@ -31,6 +32,7 @@ session_start();
 
       <ul class="nav navbar-nav navbar-right">
         <li><a href="login.php">Login</a></li>
+		<li><a href="student_signup.php">Sign up</a></li>
       </ul>
     </div>
   </div>

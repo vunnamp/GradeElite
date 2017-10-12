@@ -69,7 +69,7 @@ if(isset($_POST['upload'])){
                $zip->close();
 }
 
-            echo "<span style='color:green'>"."file has been successfully uploaded! Thank-you"."</span>";           
+            echo "<span style='color:green'>"."File has been successfully uploaded! Thank-you"."</span>";           
         }
         else
         {

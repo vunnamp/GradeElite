@@ -2,6 +2,7 @@
 <center><div class="jumbotron" style="width:70%; align:center;">
   
 <h3><span style="color:green;"><?php echo @$_GET['logout']; ?></span></h3>
+<h3><span style="color:green;"><?php echo @$_GET['success']; ?></span></h3>
 <?php if(isset($_SESSION['message'])){
 
   echo $_SESSION['message'];
