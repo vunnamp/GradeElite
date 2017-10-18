@@ -36,15 +36,16 @@
                                             <input type="file" name="file"></br>
                                             <button type="submit" class="btn btn-default" name="upload">Submit Assignment</button>
                                         </div>
-										<?php
-
-
+<?php
+error_reporting(E_ALL);
 if(isset($_POST['upload'])){
 
 
     $array = explode(".",$_FILES['file']['name']);
 
     $filename = $array[0];
+	
+	$timestamp =  date("Ymdhisa") ;
 
     $fileextension = strtolower(end($array));
 
@@ -52,7 +53,6 @@ if(isset($_POST['upload'])){
 
         if(is_dir("GradElite/unziped".$filename) == false)
         {
-
             move_uploaded_file($_FILES['file']['tmp_name'],'Ziped/'.$_FILES['file']['name']);
 
             $zip = new ZipArchive();
@@ -61,40 +61,37 @@ if(isset($_POST['upload'])){
 
             for($num = 0; $num < $zip->numFiles; $num++)
             {
-
                $fileinfo =  $zip->statIndex($num);
 
                $zip->extractTo("unZiped/".$filename);
 
                $zip->close();
-}
+			}
+			
+			//$output = exec('cmd.exe C:\xampp\htdocs\GradeElite\studentdashboard\pages\unZiped\Automate.sh');
+			//$output = shell_exec('cmd.exe /c echo %path%');
+			$output = shell_exec('c/xampp/htdocs/GradeElite/studentdashboard/pages/Automate.sh');
+			//$output = file_get_contents('C:xampp/htdocs/GradeElite/studentdashboard/pages/Automate.sh');
+			
+			//$output = exec ('C:\xampp\htdocs\GradeElite\javac.exe C:\xampp\htdocs\GradeElite\studentdashboard\pages\unZiped\Server\Server.java');
+			//$output = shell_exec('/c/Program\ Files/Java/jdk1.8.0_144/bin/javac.exe /c/xampp/htdocs/GradeElite/studentdashboard/pages/unZiped/Server/Server.java');
+			
+			echo "<pre>$output</pre>";
+			
+			//echo shell_exec($output);
 
             echo "<span style='color:green'>"."File has been successfully uploaded! Thank-you"."</span>";           
         }
         else
         {
-
-            echo $filename."has already been unzipped";
+			echo $filename."has already been unzipped";
         }
-
-
-
     }
-
-    else
-
-    {
+    else{
 
         echo "<span style='color:red'>"."Not a vaild file type! Please select .zip files"."</span>";
 
-
     }
-
-
-
-
-
-
 }
 
 ?>
