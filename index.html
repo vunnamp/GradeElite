@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Dashboard</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+  <script src="assignmentcontroller.js"></script>
+  <style>
+.card:hover{
+  border: 1px solid #ccc;
+}
+.badge{
+  cursor:pointer;
+}
+  </style>
+</head>
+<body ng-app="mainApp" data-ng-controller="ASSController">
+<div class="container" style="margin-top:30px">
+<div class="row">
+  <div class="col-md-3">
+  <ul class="nav nav-pills flex-column">
+    <li class="nav-item">
+      <a class="nav-link active" data-toggle="tab" href="#home"><i class="fa fa-home"> </i> Home</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="tab" href="#menu1"><i class="fa fa-file-text"> </i> Assignments</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="tab" href="#menu2"><i class="fa fa-comments"> </i> Discussions</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#"><i class="fa fa-folder-open"> </i> Files</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#"><i class="fa fa-commenting"> </i> Chat</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#"><i class="fa fa-handshake-o"> </i> Collaberation</a>
+    </li>
+  </ul>
+</div>
+<div class="col-md-9">
+  <div class="clearfix"><button type="button" class="btn btn-success float-right" data-toggle="modal" data-target=".myModal" ng-click="hidshow()"><i class="fa fa-plus"> </i> Assignments</button></div>
+  <hr>
+  <div class="tab-content">
+      <div id="home" class="container tab-pane active"><br>
+        <h3>HOME</h3>
+        <p>Welcome to Java course site</p>
+      </div>
+      <div id="menu1" class="container tab-pane fade"><br>
+        <h3>ASSIGNMENTS</h3>
+        <div class="row">
+        <div class="col-md-4" data-ng-repeat="Emp in EmpList">
+          <div class="card bg-info text-center" style="margin-bottom:20px">
+          <i class="fa fa-file-text fa-5x mx-auto" style="margin-top:10px"> </i>
+    <div class="card-body">
+      <h4 class="card-title">{{ Emp.Name }}</h4>
+      <p class="card-text">Grade points : {{ Emp.Salary }}</p>
+      <span class="badge badge-warning" data-toggle="modal" data-target=".myModal"><i class="fa fa-pencil" data-ng-click="BindSelectedData(Emp)"> Edit</i></span>
+      <span class="badge badge-danger" data-toggle="modal" data-target="#delete"><i class="fa fa-trash"> Delete</i></span>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="modal fade myModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title" ng-hide = "showit">Add Assignment</h4>
+          <h4 class="modal-title" ng-show="showme" >Edit Assignment</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+
+        <!-- Modal body -->
+        <div class="modal-body">
+          <form>
+    <div class="form-group">
+      <label for="usr">Name:</label>
+      <input type="text" class="form-control" id="usr" data-ng-model="EmpModel.Name">
+    </div>
+    <div class="form-group">
+      <label for="fle">Assignment:</label>
+      <input type="file" class="form-control" id="fle">
+    </div>
+    <div class="form-group">
+      <label for="pts">Grade Points:</label>
+      <input type="number" class="form-control" id="pts" data-ng-model="EmpModel.Salary">
+    </div>
+    <div class="form-group">
+      <label for="date">Due Date:</label>
+      <input type="date" class="form-control" id="date">
+    </div>
+  </form>
+        </div>
+
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-success" data-dismiss="modal" data-ng-click="UpdateData()" ng-show="showme"/>Update</button>
+          <button type="button" class="btn btn-success" data-dismiss="modal" data-ng-click="AddData()" ng-hide = "showit">Add</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="delete">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <!-- Modal body -->
+        <div class="modal-body">
+          Are you sure to delete ??
+        </div>
+
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-success btn-sm" data-ng-click="DeleteData(Emp)" data-dismiss="modal">Yes</button>
+          <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Close</button>
+        </div>
+
+      </div>
+    </div>
+</body>
+</html>
